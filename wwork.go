@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/bvarberg/wwork/internal/emc"
+	"github.com/bvarberg/wwork/cmd"
 )
 
 func main() {
-	fmt.Printf("The equilibrium moisture content is %v\n", emc.Simpson(70.0, 0.50))
+	cmd.Execute()
 }
