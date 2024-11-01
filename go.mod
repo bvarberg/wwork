@@ -3,6 +3,7 @@ module github.com/bvarberg/wwork
 go 1.23.2
 
 require (
+	github.com/martinlindhe/unit v0.0.0-20230420213220-4adfd7d0a0d6
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.9.0
 )
