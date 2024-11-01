@@ -4,13 +4,13 @@ package emc
 
 import "math"
 
-// SimpsonEMC calculates the equilibrium moisture content using the equation by
+// Simpson calculates the equilibrium moisture content using the equation by
 // Simpson (1973), documented in USDA's "Wood Handbook".
 //
 // Temperature `t` is in degrees Fahrenheit.
 //
 // Relative Humidity `r` is a percentage, where 0.00 is 0% and 1.00 is 100%.
-func SimpsonEMC(t float64, rh float64) (emc float64) {
+func Simpson(t float64, rh float64) (emc float64) {
 	W := 330 + 0.452*t + 0.00415*math.Pow(t, 2)
 	K := 0.791 + 0.000463*t - 0.000000844*math.Pow(t, 2)
 	K1 := 6.34 + 0.000775*t - 0.0000935*math.Pow(t, 2)

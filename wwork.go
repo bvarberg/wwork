@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Printf("The equilibrium moisture content is %v\n", emc.Equilibrium(70.0, 50.0))
+	fmt.Printf("The equilibrium moisture content is %v\n", emc.Simpson(70.0, 0.50))
 }

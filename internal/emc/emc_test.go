@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSimpsonEMC(t *testing.T) {
+func TestSimpsonEquilibriumCalculation(t *testing.T) {
 	// Cases created through sampling values in the table within "With the Grain"
 	// by Christian Becksvoort
 	var cases = []struct {
@@ -27,7 +27,7 @@ func TestSimpsonEMC(t *testing.T) {
 	var delta float64 = 0.1
 
 	for _, tt := range cases {
-		got := SimpsonEMC(tt.temperature, tt.relativeHumidity)
+		got := Simpson(tt.temperature, tt.relativeHumidity)
 		assert.InDelta(t, tt.want, got, delta, "Equilibrium(%f, %f) = %f; want %f within %f", tt.temperature, tt.relativeHumidity, got, tt.want, delta)
 	}
 }
