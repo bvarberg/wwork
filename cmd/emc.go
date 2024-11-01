@@ -14,6 +14,9 @@ import (
 // Celsius
 var Celsius bool = false
 
+// Friendly is a flag to indicate whether the output should be human-readable
+var Friendly bool = false
+
 var emcCmd = &cobra.Command{
 	Use:   "emc temperature relative_humidity",
 	Args:  cobra.ExactArgs(2),
@@ -42,10 +45,16 @@ emc --celsius 21.1 0.35
 		}
 
 		formattedEmc := fmt.Sprintf("%.1f", emc.Simpson(t, rh))
-		fmt.Printf("Equilibrium moisture content is %v%%\n", formattedEmc)
+
+		if Friendly {
+			fmt.Printf("Equilibrium moisture content is %v%%\n", formattedEmc)
+		} else {
+			fmt.Println(formattedEmc)
+		}
 	},
 }
 
 func init() {
 	emcCmd.Flags().BoolVarP(&Celsius, "celsius", "c", false, "temperature is in degrees Celsius")
+	emcCmd.Flags().BoolVarP(&Friendly, "friendly", "f", false, "human-friendly, readable output")
 }
