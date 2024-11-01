@@ -2,17 +2,20 @@
 // content (EMC) of wood.
 package emc
 
-// Farenheit is a temperature in degrees Farenheit
-type Farhenheit float64
+import "math"
 
-// RelativeHumidity is a percentage value, where 0.0 is 0% and 100.0 is 100%
-type RelativeHumidity float64
+// SimpsonEMC calculates the equilibrium moisture content using the equation by
+// Simpson (1973), documented in USDA's "Wood Handbook".
+//
+// Temperature `t` is in degrees Fahrenheit.
+//
+// Relative Humidity `r` is a percentage, where 0.00 is 0% and 1.00 is 100%.
+func SimpsonEMC(t float64, rh float64) (emc float64) {
+	W := 330 + 0.452*t + 0.00415*math.Pow(t, 2)
+	K := 0.791 + 0.000463*t - 0.000000844*math.Pow(t, 2)
+	K1 := 6.34 + 0.000775*t - 0.0000935*math.Pow(t, 2)
+	K2 := 1.09 + 0.0284*t - 0.0000904*math.Pow(t, 2)
 
-// MoistureContent is a percentage value, where 0.0 is 0% and 100.0 is 100%
-type MoistureContent float64
-
-// Equilibrium returns the equilibrium mosture content of wood for the given
-// climatic conditions.
-func Equilibrium(t Farhenheit, rh RelativeHumidity) MoistureContent {
-	return 9.0
+	emc = (1800 / W) * (((K * rh) / (1 - (K * rh))) + (((K1 * K * rh) + (2 * K1 * K2 * math.Pow(K, 2) * math.Pow(rh, 2))) / (1 + (K1 * K * rh) + (K1 * K2 * math.Pow(K, 2) * math.Pow(rh, 2)))))
+	return emc
 }
